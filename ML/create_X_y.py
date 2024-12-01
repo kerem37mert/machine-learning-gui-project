@@ -1,6 +1,6 @@
 import numpy as np
 
-def create_X_and_y(dataset):
+def create_X_y(dataset):
 
     ornekUzayi = dataset.values
     np.random.shuffle(ornekUzayi) ## veri setini karıştır.

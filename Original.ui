@@ -16,14 +16,53 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>382</y>
-     <width>91</width>
-     <height>41</height>
+     <x>230</x>
+     <y>280</y>
+     <width>141</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
     <string>Geri Dön</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button3">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>220</y>
+     <width>141</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Geri Dön</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button2">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>160</y>
+     <width>141</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Geri Dön</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button1">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>100</y>
+     <width>141</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>KNN</string>
    </property>
   </widget>
  </widget>
