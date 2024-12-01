@@ -30,7 +30,12 @@ TN = cm[1][1]
 FP = cm[0][1]
 FN = cm[1][0]
 
-acc = (TP + TN) / (TP + TN + FP + FN)
-print(acc)
+acc = round(float(TP + TN) / (TP + TN + FP + FN) * 100, 2)
+sensitivity = round(float(TP) / (TP + FN) * 100, 2)
+specificity = round(float(TN) / (FP + TN) * 100, 2)
+precision = round(float(TP) / (TP + FP) * 100, 2)
+
+acc = round((TP + TN)*100 / (TP + TN + FP + FN),2)
+print(round(2/((1/sensitivity)+(1/precision)),2))
 
 TP = confusion_matrix
