@@ -8,9 +8,9 @@ import result
 from ML.create_X_y import create_X_y
 
 
-class Ui_Original(QtWidgets.QDialog):
+class Ui_ModelMenu(QtWidgets.QDialog):
     def __init__(self, main_window, dataset):
-        super(Ui_Original, self).__init__()
+        super(Ui_ModelMenu, self).__init__()
 
         # Ana pencere referansı alınıyor
         self.main_window = main_window
@@ -20,7 +20,7 @@ class Ui_Original(QtWidgets.QDialog):
         print(self.dataset)
 
         # Load the UI file
-        uic.loadUi('Original.ui', self)
+        uic.loadUi('ModelMenu.ui', self)
 
         self.button1.clicked.connect(self.useKNN)
         self.backButton.clicked.connect(self.go_back)
@@ -32,7 +32,7 @@ class Ui_Original(QtWidgets.QDialog):
         model.fit(x_train, y_train)
 
         predicts = model.predict(x_test)
-        self.cm = confusion_matrix(y_test, predicts)
+        self.cm = confusion_matrix(y_test, predicts) # karışıklık matrisi
 
         self.go_to_result()
 

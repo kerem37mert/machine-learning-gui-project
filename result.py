@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtWidgets, uic
+import matplotlib.pyplot as plt
+import seaborn as sns
+from PyQt5.QtGui import QPixmap
+
+from ML.evaluation import evaluation
 
 
 class Ui_Result(QtWidgets.QDialog):
@@ -15,6 +20,31 @@ class Ui_Result(QtWidgets.QDialog):
 
         # Load the UI file
         uic.loadUi('Result.ui', self)
+
+        ################## karışıklık matrisi görsel ######################
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(self.cm, annot=True, fmt='d', cmap='Blues',
+                    xticklabels=['0', '1'],
+                    yticklabels=['0', '1'])
+        plt.xlabel('Predicted label')
+        plt.ylabel('True label')
+        plt.title('Confusion Matrix')
+        plt.savefig("confusion_matrix.png")  # PNG olarak kaydet
+        plt.close()
+        ################## karışıklık matrisi görsel ######################
+
+        acc, sensitivity, specificity, precision, F1_score, false_netative_rate = evaluation(cm)
+
+        self.label_acc.setText(f"Doğruluk {acc}")
+        self.label_sens.setText(f"Duyarlılık {sensitivity}")
+        self.label_spec.setText(f"Özgüllük {specificity}")
+        self.label_prec.setText(f"Kesindlik {precision}")
+        self.label_f1.setText(f"F1-Score {F1_score}")
+
+        pixmap = QPixmap("confusion_matrix.png")
+        self.cm_label.setPixmap(pixmap)
+        self.cm_label.setScaledContents(True)
+
 
         self.backButton.clicked.connect(self.go_back_menu)
 

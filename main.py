@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, uic
-import original
+import modelMenu
 import pandas as pd
 
 
@@ -10,15 +10,15 @@ class Ui_Main(QtWidgets.QDialog):
         uic.loadUi('main.ui', self)
 
         # veri setlerini oku
-        self.dataset1  = pd.read_csv("heart.csv")
+        self.dataset1 = pd.read_csv("heart.csv")
 
         # Button'a tıklama olayını bağla
-        self.button1.clicked.connect(self.go_to_original)
+        self.button1.clicked.connect(self.go_to_model_menu)
 
-    def go_to_original(self):
+    def go_to_model_menu(self):
         # Original penceresine geçiş yap
-        self.original_window = original.Ui_Original(self, self.dataset1)
-        self.original_window.show()
+        self.model_window = modelMenu.Ui_ModelMenu(self, self.dataset1)
+        self.model_window.show()
         self.hide()  # Ana pencereyi gizle
 
 
