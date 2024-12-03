@@ -8,6 +8,7 @@ from sklearn.svm import SVC
 
 import result
 from ML.create_X_y import create_X_y
+from ML.use_model import use_model
 
 
 class Ui_ModelMenu(QtWidgets.QDialog):
@@ -32,35 +33,25 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         self.backButton.clicked.connect(self.go_back)
 
     def useKNN(self):
-        X, y = create_X_y(self.dataset)
-        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
-        model = KNeighborsClassifier(n_neighbors=3)
-        model.fit(x_train, y_train)
 
-        predicts = model.predict(x_test)
-        self.cm = confusion_matrix(y_test, predicts) # karışıklık matrisi
+        if(self.checkBox.isChecked()):
+            pass
+
+        model = KNeighborsClassifier(n_neighbors=3)
+        self.cm = use_model(self.dataset, model)
 
         self.go_to_result()
 
     def useDecisionTree(self):
-        X, y = create_X_y(self.dataset)
-        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
-        model = DecisionTreeClassifier()
-        model.fit(x_train, y_train)
 
-        predicts = model.predict(x_test)
-        self.cm = confusion_matrix(y_test, predicts)  # karışıklık matrisi
+        model = DecisionTreeClassifier()
+        self.cm = use_model(self.dataset, model)
 
         self.go_to_result()
 
     def useSVM(self):
-        X, y = create_X_y(self.dataset)
-        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
         model = SVC(kernel='linear')
-        model.fit(x_train, y_train)
-
-        predicts = model.predict(x_test)
-        self.cm = confusion_matrix(y_test, predicts)  # karışıklık matrisi
+        self.cm = self.cm = use_model(self.dataset, model)
 
         self.go_to_result()
 
