@@ -11,11 +11,13 @@ from ML.create_X_y import create_X_y
 
 
 class Ui_ModelMenu(QtWidgets.QDialog):
-    def __init__(self, main_window, dataset):
+    def __init__(self, main_window, dataset, title):
         super(Ui_ModelMenu, self).__init__()
 
         # Ana pencere referansı alınıyor
         self.main_window = main_window
+
+        self.setWindowTitle(title)
 
         #dataseti alma
         self.dataset = dataset

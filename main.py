@@ -10,14 +10,13 @@ class Ui_Main(QtWidgets.QDialog):
         uic.loadUi('main.ui', self)
 
         # veri setlerini oku
-        self.dataset1 = pd.read_csv("heart.csv")
+        self.dataset1 = pd.read_csv("heart.csv") # orijinal veri seti
 
-        # Button'a tıklama olayını bağla
-        self.button1.clicked.connect(self.go_to_model_menu)
+        self.button1.clicked.connect(lambda: self.go_to_model_menu(self.dataset1, "Orijinal Veriler"))
 
-    def go_to_model_menu(self):
+    def go_to_model_menu(self, dataset, title):
         # Original penceresine geçiş yap
-        self.model_window = modelMenu.Ui_ModelMenu(self, self.dataset1)
+        self.model_window = modelMenu.Ui_ModelMenu(self, dataset, title)
         self.model_window.show()
         self.hide()  # Ana pencereyi gizle
 

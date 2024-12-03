@@ -38,7 +38,7 @@ class Ui_Result(QtWidgets.QDialog):
         self.label_acc.setText(f"Doğruluk {acc}")
         self.label_sens.setText(f"Duyarlılık {sensitivity}")
         self.label_spec.setText(f"Özgüllük {specificity}")
-        self.label_prec.setText(f"Kesindlik {precision}")
+        self.label_prec.setText(f"Kesinlik {precision}")
         self.label_f1.setText(f"F1-Score {F1_score}")
 
         pixmap = QPixmap("confusion_matrix.png")
