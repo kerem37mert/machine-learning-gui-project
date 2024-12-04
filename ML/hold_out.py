@@ -4,7 +4,8 @@ from sklearn.model_selection import train_test_split
 from ML.create_X_y import create_X_y
 
 
-def use_model(dataset, model):
+# datasetini ve modeli parametre olarak alıyor. Model eğitilip test ediliyor ve geri karışıklık matrisi döndürlüyor.
+def hold_out(dataset, model):
     X, y = create_X_y(dataset)
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 

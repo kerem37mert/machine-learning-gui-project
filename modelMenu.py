@@ -8,7 +8,8 @@ from sklearn.svm import SVC
 
 import result
 from ML.create_X_y import create_X_y
-from ML.use_model import use_model
+from ML.hold_out import hold_out
+from ML.kfold import kfold
 
 
 class Ui_ModelMenu(QtWidgets.QDialog):
@@ -33,25 +34,34 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         self.backButton.clicked.connect(self.go_back)
 
     def useKNN(self):
+        model = KNeighborsClassifier(n_neighbors=3)
 
         if(self.checkBox.isChecked()):
-            pass
-
-        model = KNeighborsClassifier(n_neighbors=3)
-        self.cm = use_model(self.dataset, model)
+            self.cm = kfold(self.dataset, model)
+        else:
+            self.cm = hold_out(self.dataset, model)
 
         self.go_to_result()
 
     def useDecisionTree(self):
-
         model = DecisionTreeClassifier()
-        self.cm = use_model(self.dataset, model)
+        self.cm = hold_out(self.dataset, model)
+
+        if (self.checkBox.isChecked()):
+            self.cm = kfold(self.dataset, model)
+        else:
+            self.cm = hold_out(self.dataset, model)
 
         self.go_to_result()
 
     def useSVM(self):
         model = SVC(kernel='linear')
-        self.cm = self.cm = use_model(self.dataset, model)
+        self.cm = self.cm = hold_out(self.dataset, model)
+
+        if (self.checkBox.isChecked()):
+            self.cm = kfold(self.dataset, model)
+        else:
+            self.cm = hold_out(self.dataset, model)
 
         self.go_to_result()
 
