@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>60</y>
+     <y>40</y>
      <width>201</width>
      <height>71</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>130</y>
+     <y>110</y>
      <width>201</width>
      <height>71</height>
     </rect>
@@ -43,7 +43,20 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>200</y>
+     <y>180</y>
+     <width>201</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Dengeli Veri Seti</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button4">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>250</y>
      <width>201</width>
      <height>71</height>
     </rect>
@@ -52,11 +65,11 @@
     <string>Normalizasyon Uygulanmış Veri Seti</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button4">
+  <widget class="QPushButton" name="button4_2">
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>270</y>
+     <y>320</y>
      <width>201</width>
      <height>71</height>
     </rect>
