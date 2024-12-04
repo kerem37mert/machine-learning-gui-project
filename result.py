@@ -16,7 +16,7 @@ class Ui_Result(QtWidgets.QDialog):
 
         # karışıklık matrisini al
         self.cm = cm
-        print(self.cm)
+        #print(self.cm)
 
         # Load the UI file
         uic.loadUi('Result.ui', self)

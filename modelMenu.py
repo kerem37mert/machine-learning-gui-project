@@ -24,7 +24,7 @@ class Ui_ModelMenu(QtWidgets.QDialog):
 
         #dataseti alma
         self.dataset = dataset
-        print(self.dataset)
+        #print(self.dataset)
 
         # Load the UI file
         uic.loadUi('ModelMenu.ui', self)
