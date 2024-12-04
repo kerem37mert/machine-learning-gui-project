@@ -6,7 +6,7 @@ import pandas as pd
 # veri seti dengele hale getirilir ve geriye döndürülür.
 
 def balanced_dataset(dataset):
-    X = dataset.drop('target', axis=1)  # 'class' hedef değişkeni olduğu varsayılıyor
+    X = dataset.drop('target', axis=1)
     y = dataset['target']
     # print(X)
     # print(y)
