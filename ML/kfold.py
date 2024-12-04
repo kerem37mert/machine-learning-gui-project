@@ -9,7 +9,7 @@ def kfold(dataset, model):
     X, y = create_X_y(dataset)
     kf = KFold(n_splits=5)
 
-    cm = [[0, 0], [0, 0]]
+    cm = [[0, 0], [0, 0]] # genel karışıklık matrisi
 
     fold_number = 0
     for train_index, test_index in kf.split(X):

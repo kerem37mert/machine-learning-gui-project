@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>130</x>
      <y>310</y>
      <width>141</width>
      <height>61</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="button3">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>130</x>
      <y>190</y>
      <width>141</width>
      <height>61</height>
@@ -42,7 +42,7 @@
   <widget class="QPushButton" name="button2">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>130</x>
      <y>130</y>
      <width>141</width>
      <height>61</height>
@@ -55,7 +55,7 @@
   <widget class="QPushButton" name="button1">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>130</x>
      <y>70</y>
      <width>141</width>
      <height>61</height>
@@ -68,7 +68,7 @@
   <widget class="QPushButton" name="button4">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>130</x>
      <y>250</y>
      <width>141</width>
      <height>61</height>
@@ -81,14 +81,27 @@
   <widget class="QCheckBox" name="checkBox">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>140</x>
      <y>40</y>
-     <width>161</width>
+     <width>131</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
     <string>K-fold  Kullan (K=5)</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="datasetInfo">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>50</y>
+     <width>191</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

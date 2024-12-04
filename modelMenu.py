@@ -8,6 +8,7 @@ from sklearn.svm import SVC
 
 import result
 from ML.create_X_y import create_X_y
+from ML.get_info_dataset import get_info_dataset
 from ML.hold_out import hold_out
 from ML.kfold import kfold
 
@@ -27,6 +28,9 @@ class Ui_ModelMenu(QtWidgets.QDialog):
 
         # Load the UI file
         uic.loadUi('ModelMenu.ui', self)
+
+        dataset_info = get_info_dataset(self.dataset)
+        self.datasetInfo.setText(f"Veri setindedeki\n1 sınıfına ait örnek sayısı: {dataset_info[0]}\n0 sınıfına ait örnek sayısı: {dataset_info[1]}")
 
         self.button1.clicked.connect(self.useKNN)
         self.button2.clicked.connect(self.useDecisionTree)
