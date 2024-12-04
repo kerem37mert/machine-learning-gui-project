@@ -30,9 +30,9 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         dataset_info = get_info_dataset(self.dataset)
         self.datasetInfo.setText(f"Veri setindedeki\n1 sınıfına ait örnek sayısı: {dataset_info[0]}\n0 sınıfına ait örnek sayısı: {dataset_info[1]}")
 
-        self.button1.clicked.connect(self.useKNN)
-        self.button2.clicked.connect(self.useDecisionTree)
-        self.button3.clicked.connect(self.useSVM)
+        self.button1.clicked.connect(lambda:self.go_to_result(self.useKNN))
+        self.button2.clicked.connect(lambda:self.go_to_result(self.useDecisionTree))
+        self.button3.clicked.connect(lambda:self.go_to_result(self.useDecisionTree))
         self.backButton.clicked.connect(self.go_back)
 
     def useKNN(self):
@@ -43,8 +43,6 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         else:
             self.cm = hold_out(self.dataset, model)
 
-        self.go_to_result()
-
     def useDecisionTree(self):
         model = DecisionTreeClassifier()
         self.cm = hold_out(self.dataset, model)
@@ -53,8 +51,6 @@ class Ui_ModelMenu(QtWidgets.QDialog):
             self.cm = kfold(self.dataset, model)
         else:
             self.cm = hold_out(self.dataset, model)
-
-        self.go_to_result()
 
     def useSVM(self):
         model = SVC(kernel='linear')
@@ -65,9 +61,12 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         else:
             self.cm = hold_out(self.dataset, model)
 
-        self.go_to_result()
+    def useBest(self):
+        if(self.checkBox.isChecked()):
+            pass
 
-    def go_to_result(self):
+    def go_to_result(self, useModel):
+        useModel() # modeli çalıştır.
         self.result_window = result.Ui_Result(self, self.cm)
         self.result_window.show()
         self.hide()  # Ana pencereyi gizle
