@@ -28,6 +28,7 @@ class Ui_Main(QtWidgets.QDialog):
     def go_to_model_menu(self, dataset, title):
         # Menu penceresine geçiş yap
         self.model_window = modelMenu.Ui_ModelMenu(self, dataset, title)
+        self.model_window.setWindowTitle(title)
         self.model_window.show()
         self.hide()  # Ana pencereyi gizle
 

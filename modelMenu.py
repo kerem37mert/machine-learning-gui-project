@@ -20,8 +20,6 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         # Ana pencere referansı alınıyor
         self.main_window = main_window
 
-        self.setWindowTitle(title)
-
         #dataseti alma
         self.dataset = dataset
         #print(self.dataset)

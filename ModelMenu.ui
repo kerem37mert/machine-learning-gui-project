@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Orijinal Veri Seti</string>
+   <string notr="true">Orijinal Veri Seti</string>
   </property>
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
