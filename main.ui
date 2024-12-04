@@ -65,7 +65,7 @@
     <string>Normalizasyon Uygulanmış Veri Seti</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button4_2">
+  <widget class="QPushButton" name="button5">
    <property name="geometry">
     <rect>
      <x>200</x>
