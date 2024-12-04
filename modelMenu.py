@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtWidgets, uic
-from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
 
 import result
-from ML.create_X_y import create_X_y
+from ML.evaluation import evaluation
 from ML.get_info_dataset import get_info_dataset
 from ML.hold_out import hold_out
 from ML.kfold import kfold
@@ -30,44 +28,60 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         dataset_info = get_info_dataset(self.dataset)
         self.datasetInfo.setText(f"Veri setindedeki\n1 sınıfına ait örnek sayısı: {dataset_info[0]}\n0 sınıfına ait örnek sayısı: {dataset_info[1]}")
 
-        self.button1.clicked.connect(lambda:self.go_to_result(self.useKNN))
-        self.button2.clicked.connect(lambda:self.go_to_result(self.useDecisionTree))
-        self.button3.clicked.connect(lambda:self.go_to_result(self.useDecisionTree))
+        self.button1.clicked.connect(lambda: self.go_to_result(self.useKNN))
+        self.button2.clicked.connect(lambda: self.go_to_result(self.useDecisionTree))
+        self.button3.clicked.connect(lambda: self.go_to_result(self.useSVM))
+        self.button4.clicked.connect(lambda: self.go_to_result(self.useBest))
         self.backButton.clicked.connect(self.go_back)
 
     def useKNN(self):
         model = KNeighborsClassifier(n_neighbors=3)
 
         if(self.checkBox.isChecked()):
-            self.cm = kfold(self.dataset, model)
+            cm = kfold(self.dataset, model)
         else:
-            self.cm = hold_out(self.dataset, model)
+            cm = hold_out(self.dataset, model)
+        return cm, "KNN"
 
     def useDecisionTree(self):
         model = DecisionTreeClassifier()
-        self.cm = hold_out(self.dataset, model)
 
         if (self.checkBox.isChecked()):
-            self.cm = kfold(self.dataset, model)
+            cm = kfold(self.dataset, model)
         else:
-            self.cm = hold_out(self.dataset, model)
+            cm = hold_out(self.dataset, model)
+        return cm, "Decision Tree"
 
     def useSVM(self):
         model = SVC(kernel='linear')
-        self.cm = self.cm = hold_out(self.dataset, model)
 
         if (self.checkBox.isChecked()):
-            self.cm = kfold(self.dataset, model)
+            cm = kfold(self.dataset, model)
         else:
-            self.cm = hold_out(self.dataset, model)
+            cm = hold_out(self.dataset, model)
+        return cm, "SVM"
 
     def useBest(self):
-        if(self.checkBox.isChecked()):
-            pass
+        cm_knn =  self.useKNN()[0]
+        cm_decisionTree = self.useDecisionTree()[0]
+        cm_svm = self.useSVM()[0]
+
+        acc_knn = evaluation(cm_knn)
+        acc_decision_tree = evaluation(cm_decisionTree)
+        acc_svm = evaluation(cm_svm)
+
+        if acc_knn >= acc_decision_tree and acc_knn >= acc_svm:
+            return cm_knn, "KNN En İyi Model"
+        elif acc_decision_tree >= acc_knn and acc_decision_tree >= acc_svm:
+            return cm_decisionTree, "Decision Tree - En İyi Model"
+        else:
+            return cm_svm, "SVM - En İyi Model"
+
 
     def go_to_result(self, useModel):
-        useModel() # modeli çalıştır.
-        self.result_window = result.Ui_Result(self, self.cm)
+        cm, title = useModel() # modeli çalıştır.
+        self.result_window = result.Ui_Result(self, cm)
+        self.result_window.setWindowTitle(title)
         self.result_window.show()
         self.hide()  # Ana pencereyi gizle
 
