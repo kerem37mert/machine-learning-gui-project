@@ -1,8 +1,7 @@
+import pandas as pd
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
-
 from ML.create_X_y import create_X_y
-
 
 # datasetini ve modeli parametre olarak alıyor. Model eğitilip test ediliyor ve geri karışıklık matrisi döndürlüyor.
 def hold_out(dataset, model):
@@ -13,5 +12,15 @@ def hold_out(dataset, model):
 
     predicts = model.predict(x_test)
     cm = confusion_matrix(y_test, predicts)  # karışıklık matrisi
+
+    proba = model.predict_proba(x_test)
+
+    # Tahmin edilen olasılıkları düzenli bir tablo formatında göster
+    proba_df = pd.DataFrame(proba, columns=[f"Sınıf {i}" for i in range(proba.shape[1])])
+    proba_df['Tahmin'] = predicts
+    proba_df['Gerçek'] = y_test.values if hasattr(y_test, "values") else y_test
+
+    print("Olasılık Tablosu:")
+    print(proba_df.head())  # İlk birkaç satırı yazdır
 
     return cm

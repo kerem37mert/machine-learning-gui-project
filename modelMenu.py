@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtWidgets, uic
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 
 import result
@@ -30,7 +30,7 @@ class Ui_ModelMenu(QtWidgets.QDialog):
 
         self.button1.clicked.connect(lambda: self.go_to_result(self.useKNN))
         self.button2.clicked.connect(lambda: self.go_to_result(self.useDecisionTree))
-        self.button3.clicked.connect(lambda: self.go_to_result(self.useSVM))
+        self.button3.clicked.connect(lambda: self.go_to_result(self.useMLP))
         self.button4.clicked.connect(lambda: self.go_to_result(self.useBest))
         self.backButton.clicked.connect(self.go_back)
 
@@ -52,30 +52,30 @@ class Ui_ModelMenu(QtWidgets.QDialog):
             cm = hold_out(self.dataset, model)
         return cm, "Decision Tree"
 
-    def useSVM(self):
-        model = SVC(kernel='linear')
+    def useMLP(self):
+        model = MLPClassifier()
 
         if (self.checkBox.isChecked()):
             cm = kfold(self.dataset, model)
         else:
             cm = hold_out(self.dataset, model)
-        return cm, "SVM"
+        return cm, "MLP"
 
     def useBest(self):
         cm_knn =  self.useKNN()[0]
         cm_decisionTree = self.useDecisionTree()[0]
-        cm_svm = self.useSVM()[0]
+        cm_mlp = self.useMLP()[0]
 
         acc_knn = evaluation(cm_knn)
         acc_decision_tree = evaluation(cm_decisionTree)
-        acc_svm = evaluation(cm_svm)
+        acc_mlp = evaluation(cm_mlp)
 
-        if acc_knn >= acc_decision_tree and acc_knn >= acc_svm:
+        if acc_knn >= acc_decision_tree and acc_knn >= acc_mlp:
             return cm_knn, "KNN En İyi Model"
-        elif acc_decision_tree >= acc_knn and acc_decision_tree >= acc_svm:
+        elif acc_decision_tree >= acc_knn and acc_decision_tree >= acc_mlp:
             return cm_decisionTree, "Decision Tree - En İyi Model"
         else:
-            return cm_svm, "SVM - En İyi Model"
+            return cm_mlp, "MLP - En İyi Model"
 
 
     def go_to_result(self, useModel):
