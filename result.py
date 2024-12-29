@@ -6,9 +6,11 @@ from PyQt5.QtGui import QPixmap
 
 from ML.evaluation import evaluation
 
+import predictProba
+
 
 class Ui_Result(QtWidgets.QDialog):
-    def __init__(self, main_window, cm):
+    def __init__(self, main_window, cm, proba):
         super(Ui_Result, self).__init__()
 
         # Ana pencere referansı alınıyor
@@ -17,6 +19,8 @@ class Ui_Result(QtWidgets.QDialog):
         # karışıklık matrisini al
         self.cm = cm
         #print(self.cm)
+        # probayı al
+        self.proba = proba
 
         # Load the UI file
         uic.loadUi('Result.ui', self)
@@ -47,6 +51,13 @@ class Ui_Result(QtWidgets.QDialog):
 
 
         self.backButton.clicked.connect(self.go_back_menu)
+        self.predict_proba.clicked.connect(self.go_predictProba)
+
+
+    def go_predictProba(self):
+        self.predict_proba_window = predictProba.Ui_PredictProba(self, self.proba)
+        self.predict_proba_window.show()
+        self.hide()  # Ana pencereyi gizle
 
     def go_back_menu(self):
         # Ana pencereye geri dön

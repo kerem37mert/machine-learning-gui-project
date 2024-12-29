@@ -38,49 +38,49 @@ class Ui_ModelMenu(QtWidgets.QDialog):
         model = KNeighborsClassifier(n_neighbors=3)
 
         if(self.checkBox.isChecked()):
-            cm = kfold(self.dataset, model)
+            cm, proba = kfold(self.dataset, model)
         else:
-            cm = hold_out(self.dataset, model)
-        return cm, "KNN"
+            cm, proba = hold_out(self.dataset, model)
+        return cm, proba, "KNN"
 
     def useDecisionTree(self):
         model = DecisionTreeClassifier()
 
         if (self.checkBox.isChecked()):
-            cm = kfold(self.dataset, model)
+            cm, proba = kfold(self.dataset, model)
         else:
-            cm = hold_out(self.dataset, model)
-        return cm, "Decision Tree"
+            cm, proba = hold_out(self.dataset, model)
+        return cm, proba, "Decision Tree"
 
     def useMLP(self):
         model = MLPClassifier()
 
         if (self.checkBox.isChecked()):
-            cm = kfold(self.dataset, model)
+            cm, proba = kfold(self.dataset, model)
         else:
-            cm = hold_out(self.dataset, model)
-        return cm, "MLP"
+            cm, proba = hold_out(self.dataset, model)
+        return cm, proba, "MLP"
 
     def useBest(self):
-        cm_knn =  self.useKNN()[0]
-        cm_decisionTree = self.useDecisionTree()[0]
-        cm_mlp = self.useMLP()[0]
+        cm_knn, proba_knn, name1 =  self.useKNN()
+        cm_decisionTree, proba_decisionTree, name2 = self.useDecisionTree()
+        cm_mlp, proba_mlp, name3 = self.useMLP()
 
         acc_knn = evaluation(cm_knn)
         acc_decision_tree = evaluation(cm_decisionTree)
         acc_mlp = evaluation(cm_mlp)
 
         if acc_knn >= acc_decision_tree and acc_knn >= acc_mlp:
-            return cm_knn, "KNN En İyi Model"
+            return cm_knn, proba_knn, "KNN En İyi Model"
         elif acc_decision_tree >= acc_knn and acc_decision_tree >= acc_mlp:
-            return cm_decisionTree, "Decision Tree - En İyi Model"
+            return cm_decisionTree, proba_decisionTree, "Decision Tree - En İyi Model"
         else:
-            return cm_mlp, "MLP - En İyi Model"
+            return cm_mlp, proba_mlp, "MLP - En İyi Model"
 
 
     def go_to_result(self, useModel):
-        cm, title = useModel() # modeli çalıştır.
-        self.result_window = result.Ui_Result(self, cm)
+        cm, proba, title = useModel() # modeli çalıştır.
+        self.result_window = result.Ui_Result(self, cm, proba)
         self.result_window.setWindowTitle(title)
         self.result_window.show()
         self.hide()  # Ana pencereyi gizle
